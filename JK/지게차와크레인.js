@@ -1,3 +1,5 @@
+// https://school.programmers.co.kr/learn/courses/30/lessons/388353
+
 function chk(storage, x, y) {
   const [x_len, y_len] = [storage.length, storage[0].length];
   const dx = [-1, 1, 0, 0];

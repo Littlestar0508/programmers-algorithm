@@ -1,3 +1,5 @@
+// https://school.programmers.co.kr/learn/courses/30/lessons/389479
+
 function solution(players, m, k) {
   let answer = 0;
 

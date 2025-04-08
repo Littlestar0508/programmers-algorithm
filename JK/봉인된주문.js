@@ -32,3 +32,5 @@ function solution(n, bans) {
 }
 
 console.log(solution(7388, ["gqk", "kdn", "jxj", "jxi", "fug", "jxg", "ewq", "len", "bhc"]));
+
+// 처음엔 합을 abc처럼 있으면 1*100+2*10+3 처럼 생각했는데 그렇게 되면 2*10(b* 과 t가 똑같은 경우)이 20이랑 똑같은 경우가 발생해서 에러가 생겨서 인터넷 찬스를 썼다..

@@ -25,6 +25,11 @@
 # 2 2 4 4 4 5 | 5 5 5 6 6 6 | 2 4 4 4 5 5 | 5 5 5 6 6 6
 # 12개
 
+# dp[i] = dp[i - 1] + 2 * dp[i - 2] + 5 * dp[i - 3] + 2 * dp[i - 4] + 2 * dp[i - 5] + 4 * dp[i - 6] ...
+# dp[i + 3] = dp[i + 2] + 2 * dp[i + 1] + 5 * dp[i] + 2 * dp[i - 1] + 2 * dp[i - 2] + 4 * dp[i - 3] ...
+# dp[i + 3] = dp[i + 2] + 2 * dp[i + 1] + 6 * dp[i] + dp[i - 1] - dp[i - 3]
+# dp[i] = dp[i - 1] + 2 * dp[i - 2] + 6 * dp[i - 3] + dp[i - 4] - dp[i - 6]
+
 def solution(n): # 시간 초과가 나버리는데 => 뭔가 점화식을 간단화 시킬 방법이 존재할 듯
     dp = [1,1,3,10]
     for i in range(4, n + 1):
@@ -34,6 +39,13 @@ def solution(n): # 시간 초과가 나버리는데 => 뭔가 점화식을 간�
                 tmp += 4 * dp[i - j]
             else:
                 tmp += 2 * dp[i - j]
+        dp.append(tmp % 1000000007)
+    return dp[n]
+
+def solution(n):
+    dp = [1,1,3,10,23,62,170]
+    for i in range(7, n + 1):
+        tmp = dp[i - 1] + 2 * dp[i - 2] + 6 * dp[i - 3] + dp[i - 4] - dp[i - 6]
         dp.append(tmp % 1000000007)
     return dp[n]
 

@@ -8,6 +8,8 @@
 # 최소공배수마다 반복될 거라는 건 안일한 생각임. 왜냐면 작업 처리 시간이 최대 10000이기 때문에 10000 안쪽으로 최소공배수가 존재할거라는 생각을 갖다 버려야 함
 # 그래서 남예준은 남자답게 포기하겠음
 
+# 알아보니 시간 h 동안 cores[i]에서 일어날 수 있는 작업의 총 양은 h//cores[i] 래 그래서 이분탐색 쓰는 듯
+
 def solution(n, cores):
     if n <= len(cores):
         return n
@@ -25,3 +27,32 @@ def solution(n, cores):
 
 print(solution(6, [1,2,3]))
 print(solution(5, [50, 50, 50, 30])) # 4
+
+
+def solution(n, cores):
+
+    if n <= len(cores):
+        return n
+    else:
+        n -= len(cores)
+        left = 1
+        right = max(cores) * n
+
+        while left < right:
+            mid = (left + right) // 2
+            capacity = 0
+            for c in cores:
+                capacity += mid // c
+            if capacity >= n:
+                right = mid
+            else:
+                left = mid + 1
+
+        for c in cores:
+            n -= (right-1) // c
+
+        for i in range(len(cores)):
+            if right % cores[i] == 0:
+                n -= 1
+                if n == 0:
+                    return i + 1

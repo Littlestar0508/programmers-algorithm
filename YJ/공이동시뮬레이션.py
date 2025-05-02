@@ -11,7 +11,6 @@ def solution(n, m, x, y, queries):
     sx, sy, ex, ey = x, y, x, y
 
     for q, dx in reversed(queries):
-        print(q, dx)
         if q == 0: # 원래 왼쪽으로 이동 => 오른쪽으로 갈 수 있어야겠죠 y가 움직입니다. 양의 방향으로요. sy가 0일 때는 sy 고정,
             if sy == 0:
                 ey = min(m - 1, ey + dx)

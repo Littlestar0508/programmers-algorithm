@@ -1,6 +1,5 @@
 # https://school.programmers.co.kr/learn/courses/30/lessons/86053
 
-# https://velog.io/@lake/%EC%9D%B4%EB%B6%84%ED%83%90%EC%83%89-%ED%8C%8C%EB%9D%BC%EB%A9%94%ED%8A%B8%EB%A6%AD-%EC%84%9C%EC%B9%98Parametric-Search
 # 금은, 시간, 적재량 3가지의 변수? 존재
 # 이걸로 어떻게 이분탐색을 판단해야하냐라는 것
 # 선입선출 스케줄링하고 비슷한 그거 같음
@@ -17,9 +16,9 @@ def solution(a, b, g, s, w, t):
             # 왔다가 갔다가 다시 와야하는게 인지상정이랄까 다시 가는 건 의미가 없음
             cnt = ((mid - t[i]) // (2 * t[i])) + 1
             weight = min(cnt * w[i], g[i] + s[i]) # 최대로 갖고 갈 수 있는 한계치
-            total += weight
+            total += weight # 총량 비교해야 한 방에 이동하는 경우 체크 가능
             gold += min(weight, g[i]) # 금이 최대 적재량보다 모자란 경우와 비교
-            silver += min(weight, s[i]) # 은이 최대 적재량보다 모자란 경우와 비교교
+            silver += min(weight, s[i]) # 은이 최대 적재량보다 모자란 경우와 비교
         
         if total >= a + b and gold >= a and silver >= b:
             return True

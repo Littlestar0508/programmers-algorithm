@@ -35,11 +35,11 @@ function solution(k, people, edge) {
       const branch = edge.find((e) => (e[0] === idx && e[1] < idx) || (e[1] === idx && e[0] < idx));
       if (branch) {
         if (branch[0] === idx) {
-          answer += Math.ceil(people[branch[0] - 1] / 3);
+          answer += Math.ceil(people[branch[0] - 1] / k);
           people[branch[1] - 1] += people[branch[0] - 1];
         }
         if (branch[1] === idx) {
-          answer += Math.ceil(people[branch[1] - 1] / 3);
+          answer += Math.ceil(people[branch[1] - 1] / k);
           people[branch[0] - 1] += people[branch[1] - 1];
         }
       }

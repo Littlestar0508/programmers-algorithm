@@ -3,6 +3,7 @@ function solution(k, node, edge) {
 
   function dfs(left, right, cur, depth) {
     if (depth === k) {
+      answer %= 10007;
       answer++;
       return;
     }
@@ -12,7 +13,6 @@ function solution(k, node, edge) {
       if (node[i] === "(") {
         if (k / 2 <= left) continue;
         const leftArr = edge.filter((item) => item.includes(cur) && item.includes(i + 1));
-        console.log(leftArr);
         for (let j = 0; j < leftArr.length; j++) {
           const [x, y] = leftArr[j];
           if (x === cur) dfs(left + 1, right, y, depth + 1);

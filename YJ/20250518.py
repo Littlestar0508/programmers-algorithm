@@ -185,3 +185,30 @@
 #     return answer
 
 # print(solution(4, "((())", [[1,2], [1,3], [2,3], [2,4], [3,5], [4, 5]]))
+
+T = int(input())
+
+d = 10**9 + 7
+fact = [1, 1]
+for i in range(2, 10**6):  # 넉넉하게
+    fact.append((i * fact[-1]) % d)
+
+def inv(a):
+    return pow(a, d - 2, d)
+
+for test_case in range(1, T + 1):
+    a, b = map(int, input().split())
+    if a == 0 or b == 0:
+        answer = -1
+    elif (2*a - b) % 3 != 0 or (2*b - a) % 3 != 0:
+        answer = -1
+    else:
+        x = (2*a - b) // 3
+        y = (2*b - a) // 3
+        if x < 0 or y < 0:
+            answer = -1
+        else:
+            denom = (fact[x] * fact[y]) % d
+            answer = (fact[x + y] * inv(denom)) % d
+
+    print(f'#{test_case} {answer}')

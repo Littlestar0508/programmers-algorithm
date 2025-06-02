@@ -4,6 +4,13 @@
 // 형태는 bfs로 풀고 있다
 
 function solution(N, M, S, K, culture, edge) {
+  const graph = Array.from(Array(N), () => []);
+
+  for (const [a, b] of edge) {
+    graph[a - 1].push(b);
+    graph[b - 1].push(a);
+  }
+
   const length = Array(N).fill(-1);
   const visited = Array(N).fill(false);
   // 처음에 queue형태로 하나씩 빼려고 했으나 시간 복잡도 최소한으로 하고자 index를 직접 표기
@@ -25,22 +32,31 @@ function solution(N, M, S, K, culture, edge) {
 
     // 현재 index와 접한 점들을 탐색
     // 이것도 좋은 방법이 없을까..
-    const connected = edge.filter((item) => item.includes(index));
-
-    for (let j = 0; j < connected.length; j++) {
-      const [x, y] = connected[j];
-      if (x === index && visited[y - 1] === false) {
-        length[y - 1] = length[x - 1] + 1;
-        visited[y - 1] = true;
-        indexArr.push(y);
-      }
-      if (y === index && visited[x - 1] === false) {
-        length[x - 1] = length[y - 1] + 1;
-        visited[x - 1] = true;
-        indexArr.push(x);
-      }
+    // const connected = edge.filter((item) => item.includes(index));
+    for (let j = 0; j < graph[index - 1].length; j++) {
+      const next = graph[index - 1][j];
+      if (visited[next - 1]) continue;
+      length[next - 1] = length[index - 1] + 1;
+      visited[next - 1] = true;
+      indexArr.push(next);
     }
+
+    // for (let j = 0; j < connected.length; j++) {
+    //   const [x, y] = connected[j];
+    //   if (x === index && visited[y - 1] === false) {
+    //     length[y - 1] = length[x - 1] + 1;
+    //     visited[y - 1] = true;
+    //     indexArr.push(y);
+    //   }
+    //   if (y === index && visited[x - 1] === false) {
+    //     length[x - 1] = length[y - 1] + 1;
+    //     visited[x - 1] = true;
+    //     indexArr.push(x);
+    //   }
+    // }
   }
+
+  console.log(length);
 
   const answer = length.filter((item) => item <= S);
   return answer.length;

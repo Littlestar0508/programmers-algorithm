@@ -56,8 +56,6 @@ function solution(N, M, S, K, culture, edge) {
     // }
   }
 
-  console.log(length);
-
   const answer = length.filter((item) => item <= S);
   return answer.length;
 }

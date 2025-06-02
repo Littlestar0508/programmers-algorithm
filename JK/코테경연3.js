@@ -1,35 +1,47 @@
+// visitied는 방문 체크 배열
+// length는 culture 섬에 도달할 수 있는 최소한의 거리
+// indexArr은 queue
+// 형태는 bfs로 풀고 있다
+
 function solution(N, M, S, K, culture, edge) {
   const length = Array(N).fill(-1);
-  const visited = Array(N).fill(-1);
+  const visited = Array(N).fill(false);
+  // 처음에 queue형태로 하나씩 빼려고 했으나 시간 복잡도 최소한으로 하고자 index를 직접 표기
+  let cur = 0;
 
   const indexArr = [];
 
   for (let i = 0; i < culture.length; i++) {
+    // culture에 속했다면 거리는 0으로 확정 후 방문했다고 표시
     length[culture[i] - 1] = 0;
-    visited[culture[i] - 1] = 0;
+    visited[culture[i] - 1] = true;
     indexArr.push(culture[i]);
   }
 
-  while (indexArr.length > 0) {
-    const index = indexArr.shift();
-    visited[index - 1] = 1;
+  // indexArr에서 빼는 방식이 아닌 직접 index를 움직이는 방식 채택
+  while (cur < indexArr.length) {
+    const index = indexArr[cur++];
+    visited[index - 1] = true;
 
+    // 현재 index와 접한 점들을 탐색
+    // 이것도 좋은 방법이 없을까..
     const connected = edge.filter((item) => item.includes(index));
 
     for (let j = 0; j < connected.length; j++) {
       const [x, y] = connected[j];
-      if (x === index && visited[y - 1] === -1) {
+      if (x === index && visited[y - 1] === false) {
         length[y - 1] = length[x - 1] + 1;
-        visited[y - 1] = 0;
+        visited[y - 1] = true;
         indexArr.push(y);
       }
-      if (y === index && visited[x - 1] === -1) {
+      if (y === index && visited[x - 1] === false) {
         length[x - 1] = length[y - 1] + 1;
-        visited[x - 1] = 0;
+        visited[x - 1] = true;
         indexArr.push(x);
       }
     }
   }
+
   const answer = length.filter((item) => item <= S);
   return answer.length;
 }

@@ -10,24 +10,34 @@ function solution(N, M, S, K, culture, edge) {
   while (true) {
     if (visited.indexOf(-1) === -1) break;
 
-    const index = visited.indexOf(0) + 1;
-    visited[index - 1] = 1;
-    const connected = edge.filter((item) => item.includes(index));
+    const indexArr = [];
+    while (true) {
+      if (visited.indexOf(0) === -1) break;
+      idx = visited.indexOf(0) + 1;
+      indexArr.push(idx);
+      visited[idx - 1] = 1;
+    }
 
-    for (let i = 0; i < connected.length; i++) {
-      const [x, y] = connected[i];
-      if (x === index && visited[y - 1] === -1) {
-        length[y - 1] = length[x - 1] + 1;
-        visited[y - 1] = 0;
-      }
-      if (y === index && visited[x - 1] === -1) {
-        length[x - 1] = length[y - 1] + 1;
-        visited[x - 1] = 0;
+    for (let i = 0; i < indexArr.length; i++) {
+      const index = indexArr[i];
+
+      const connected = edge.filter((item) => item.includes(index));
+
+      for (let j = 0; j < connected.length; j++) {
+        const [x, y] = connected[j];
+        if (x === index && visited[y - 1] === -1) {
+          length[y - 1] = length[x - 1] + 1;
+          visited[y - 1] = 0;
+        }
+        if (y === index && visited[x - 1] === -1) {
+          length[x - 1] = length[y - 1] + 1;
+          visited[x - 1] = 0;
+        }
       }
     }
   }
   const answer = length.filter((item) => item <= S);
-  return length;
+  return answer.length;
 }
 
 console.log(

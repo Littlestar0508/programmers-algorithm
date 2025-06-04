@@ -6,7 +6,25 @@
 // ex) 1:9시간 2:9시간 과 같이
 
 function solution(N, T, time) {
-  return 1;
+  const answer = [];
+  let spend = 0;
+
+  while (true) {
+    if (Math.max(...time) === 0) break;
+
+    for (let i = 0; i < time.length; i++) {
+      if (time[i] === 0) continue;
+      if (time[i] > T) {
+        spend += T;
+        time[i] -= T;
+      } else if (time[i] <= T) {
+        spend += time[i];
+        answer[i] = spend;
+        time[i] = 0;
+      }
+    }
+  }
+  console.log(answer);
 }
 
 console.log(solution(3, 3, [4, 2, 3]));

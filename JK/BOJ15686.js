@@ -58,7 +58,7 @@ const dfs = (depth, index) => {
   for (let i = index; i < chicken.length; i++) {
     if (visited[i]) continue;
     visited[i] = true;
-    dfs(depth + 1, i);
+    dfs(depth + 1, i + 1);
     visited[i] = false;
   }
 };

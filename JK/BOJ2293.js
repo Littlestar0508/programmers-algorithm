@@ -12,7 +12,7 @@ let input = fs
   .split(/\r?\n/);
 
 const [N, K] = input[0].split(" ").map(Number);
-const arr = input.slice(1, N + 1).map(Number);
+const arr = input.slice(1, input.length).map(Number);
 
 const dp = Array(K + 1).fill(0);
 dp[0] = 1;

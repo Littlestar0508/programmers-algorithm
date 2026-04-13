@@ -43,7 +43,7 @@ function Combination(idx) {
     if (chk[i]) continue;
     chk[i] = true;
     selected.push(chicken[i]);
-    Combination(i + 1, [...selected]);
+    Combination(i + 1);
     selected.pop();
     chk[i] = false;
   }

@@ -4,7 +4,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Scanner;
 
-class Solution {
+class 탈주범검거 {
   public static void main(String args[]) throws Exception {
 
     Scanner sc = new Scanner(System.in);

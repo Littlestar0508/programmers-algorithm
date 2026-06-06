@@ -2,7 +2,7 @@ package JK;
 
 import java.util.Scanner;
 
-class Solution {
+class 특이한자석 {
   public static void main(String args[]) throws Exception {
 
     Scanner sc = new Scanner(System.in);

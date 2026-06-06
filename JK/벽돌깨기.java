@@ -4,7 +4,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Scanner;
 
-class Solution {
+class 벽돌깨기 {
   static int answer;
 
   public static void main(String args[]) throws Exception {
